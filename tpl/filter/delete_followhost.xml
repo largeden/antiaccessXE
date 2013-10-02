@@ -1,0 +1,10 @@
+<filter name="delete_followhost" module="antiaccess" act="procAntiaccessAdminDeleteFollowhost" confirm_msg_code="confirm_delete">
+    <form>
+        <node target="follow_srl" required="true" />
+    </form>
+    <parameter />
+    <response callback_func="completeDeleteFollow">
+        <tag name="error" />
+        <tag name="message" />
+    </response>
+</filter>

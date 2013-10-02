@@ -1,0 +1,55 @@
+<query id="getAntiaccessAccessipList" action="select">
+    <tables>
+        <table name="antiaccess_access_ip" alias="access_ip" />
+        <table name="antiaccess_ban_ip" alias="ban_ip" type="left join">
+            <conditions>
+                <condition operation="equal" column="access_ip.ipaddress" default="ban_ip.ipaddress" />
+            </conditions>
+        </table>
+        <table name="antiaccess_white_ip" alias="white_ip" type="left join">
+            <conditions>
+                <condition operation="equal" column="access_ip.ipaddress" default="white_ip.ipaddress" />
+            </conditions>
+        </table>
+    </tables>
+    <columns>
+        <column name="access_ip.*" />
+        <column name="ban_ip.apply" alias="ban_apply" />
+        <column name="white_ip.apply" alias="white_apply" />
+    </columns>
+    <conditions>
+        <condition operation="equal" column="access_ip.access_srl" var="access_srl" filter="number" pipe="where" />
+        <condition operation="equal" column="access_ip.ipaddress" var="ipaddress" pipe="and" />
+        <condition operation="equal" column="access_ip.block" var="block" pipe="and" />
+        <condition operation="more" column="access_ip.limit_count" var="limit_count" pipe="and" />
+        <condition operation="more" column="access_ip.limit_display" var="limit_display" pipe="and" />
+        <condition operation="more" column="access_ip.limit_rss" var="limit_rss" pipe="and" />
+        <condition operation="more" column="access_ip.limit_atom" var="limit_atom" pipe="and" />
+        <condition operation="more" column="access_ip.limit_trackback" var="limit_trackback" pipe="and" />
+        <condition operation="more" column="access_ip.limit_act" var="limit_act" pipe="and" />
+        <condition operation="more" column="access_ip.occur_count" var="occur_count" pipe="and" />
+        <condition operation="equal" column="ban_ip.apply" var="banip_apply" pipe="and" />
+        <condition operation="equal" column="white_ip.apply" var="whiteip_apply" pipe="and" />
+        <group pipe="and">
+            <condition operation="like" column="access_ip.ipaddress" var="s_ipaddress" pipe="or" />
+            <condition operation="equal" column="access_ip.block" var="s_block" pipe="or" />
+            <condition operation="equal" column="access_ip.limit_count" var="s_limit_count" pipe="or" />
+            <condition operation="equal" column="access_ip.limit_display" var="s_limit_display" pipe="or" />
+            <condition operation="equal" column="access_ip.limit_rss" var="s_limit_rss" pipe="or" />
+            <condition operation="equal" column="access_ip.limit_atom" var="s_limit_atom" pipe="or" />
+            <condition operation="equal" column="access_ip.limit_trackback" var="s_limit_trackback" pipe="or" />
+            <condition operation="equal" column="access_ip.limit_act" var="s_limit_act" pipe="or" />
+            <condition operation="equal" column="access_ip.occur_count" var="s_occur_count" pipe="or" />
+            <condition operation="equal" column="ban_ip.apply" var="s_banip_apply" pipe="or" />
+            <condition operation="equal" column="white_ip.apply" var="s_whiteip_apply" pipe="or" />
+            <condition operation="like_prefix" column="access_ip.regdate" var="s_regdate" pipe="or" />
+            <condition operation="like_prefix" column="access_ip.last_update" var="s_last_update" pipe="or" />
+        </group>
+    </conditions>
+    <navigation>
+        <index var="sort_index" default="access_ip.access_srl" order="order_type" />
+        <list_count var="list_count" default="20" />
+        <page_count var="page_count" default="10" />
+        <page var="page" default="1" />
+    </navigation>
+</query>

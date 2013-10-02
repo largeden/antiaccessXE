@@ -1,0 +1,306 @@
+<include target="header.html" />
+<div cond="$XE_VALIDATOR_MESSAGE" class="message {$XE_VALIDATOR_MESSAGE_TYPE}">
+	<p>{$XE_VALIDATOR_MESSAGE}</p>
+</div>
+
+<block cond="$anti_config->rank">
+<h4 class="xeAdmin">{$lang->antiaccess_rank}</h4>
+<p cond="$anti_config->rank=='D'" style="background-color:#f4f4f4;padding:10px;">{$lang->antiaccess_rank_distributor}</p>
+<p cond="$anti_config->rank=='S'" style="background-color:#f4f4f4;padding:10px;">{$lang->antiaccess_rank_subscriber}</p>
+<span class="btn"><a href="#rankCheck" onclick="$antiaccess.doRankCheck();return false;">동작상태 확인하기</a></span>
+</block>
+<h4 class="xeAdmin">{$lang->antiaccess_use}</h4>
+<table cellspacing="0" id="use_config" class="rowTable" summary="{$lang->antiaccess_use_summary}">
+<caption>{$lang->antiaccess_caption} : use config</caption>
+    <tr>
+        <th scope="col"><div>{$lang->antiaccess_use_block}</div></th>
+        <td>
+            <input type="checkbox" name="use_block" id="use_block" value="Y" checked="checked"|cond="$anti_config->use->use_block=='Y'" /><label for="use_block">{$lang->use}</label>
+            <p>{$lang->antiaccess_use_block_description}</p>
+        </td>
+    </tr>
+    <tr>
+        <th scope="col"><div>{$lang->antiaccess_use_banned}</div></th>
+        <td>
+            <input type="checkbox" name="use_banned" id="use_banned" value="Y" checked="checked"|cond="$anti_config->use->use_banned=='Y'" /><label for="use_banned">{$lang->use}</label>
+            <p>{$lang->antiaccess_use_banned_description}</p>
+        </td>
+    </tr>
+    <tr>
+        <th scope="col"><div>{$lang->antiaccess_use_white}</div></th>
+        <td>
+            <input type="checkbox" name="use_white" id="use_white" value="Y" checked="checked"|cond="$anti_config->use->use_white=='Y'" /><label for="use_white">{$lang->use}</label>
+            <p>{$lang->antiaccess_use_white_description}</p>
+        </td>
+    </tr>
+    <tr>
+        <th scope="col"><div>{$lang->antiaccess_use_country}</div></th>
+        <td>
+            <input type="checkbox" name="use_country" id="use_country" value="Y" checked="checked"|cond="$anti_config->use->use_country=='Y'" /><label for="use_white">{$lang->use}</label>
+            <p>{$lang->antiaccess_use_country_description}</p>
+        </td>
+    </tr>
+    <tr>
+        <th colspan="2">
+            <span style="font-weight:normal;">{$lang->antiaccess_use_description}</span>
+        </th>
+    </tr>
+</table>
+
+
+<form ruleset="insertCountry" id="insertCountry" class="form" action="./" method="post" enctype="multipart/form-data" class="form">
+	<input type="hidden" name="module" value="antiaccess" />
+	<input type="hidden" name="act" value="procAntiaccessAdminInsertCountry" />
+	<input type="hidden" name="country_code" value="{$anti_config->country->list}" />
+<h4 class="xeAdmin">{$lang->antiaccess_country}</h4>
+<table cellspacing="0" id="use_config" class="rowTable" summary="{$lang->antiaccess_use_summary}">
+<caption>{$lang->antiaccess_caption} : country</caption>
+    <tr>
+        <th scope="col"><div>{$lang->antiaccess_country_select}</div></th>
+        <td>
+                <div class="targetItem">
+{$lang->antiaccess_country_select_total}
+		            <ul id="country_selectable">
+		               <!--@foreach($country_list as $key => $val)-->
+			                <li class="ui-widget-content" title="{$key}" cond="$val"><img src="{$tpl_path}img/flag/16/{strtolower($key)}.png" width="15" height="10" border="0" alt="{$key}" /> {$val}</li>
+		               <!--@endforeach-->
+		            </ul>
+				</div>
+
+                <div class="displayButton">
+                    <a href="#$antiaccess.doInsertItem" onclick="$antiaccess.doInsertItem();" class="buttonSet buttonRight" title="{$lang->cmd_insert}"><span>{$lang->cmd_insert}</span></a><br />
+                    <a href="#$antiaccess.doDeleteItem" onclick="$antiaccess.doDeleteItem();" class="buttonSet buttonLeft" title="{$lang->cmd_delete}"><span>{$lang->cmd_delete}</span></a><br />
+                </div>
+
+
+                <div class="displayItem">
+{$lang->antiaccess_country_selected}
+		            <ul id="country_selectable2" type="disc">
+		               <!--@foreach($anti_config->country->code as $key => $val)-->
+			                <li class="ui-widget-content" title="{$key}"><img src="{$tpl_path}img/flag/16/{strtolower($key)}.png" width="15" height="10" border="0" alt="{$key}" /> {$val}</li>
+		               <!--@endforeach-->
+		            </ul>
+				</div>
+				<p style="clear:both;font-size:0.75em;color:#aaa;">Draw a box with your cursor to select items. Hold down the Ctrl key to make multiple non-adjacent selections.</p>
+        </td>
+    </tr>
+        <tr class="row">
+            <th scope="col"><div>{$lang->antiaccess_country_conn}</div></th>
+            <td class="wide">
+                <label for="country_block"><input type="radio" id="country_block" name="country_conn" value="block" checked="checked"|cond="$anti_config->country->conn=='block'" /> {$lang->antiaccess_country_conn_block}</label> <br />
+                <label for="country_white"><input type="radio" id="country_white" name="country_conn" value="white" checked="checked"|cond="$anti_config->country->conn=='white'" /> {$lang->antiaccess_country_conn_white}</label>
+                <p>{$lang->antiaccess_country_conn_description}</p>
+            </td>
+        </tr>
+        <tr>
+            <th colspan="2">
+				<div class="btnArea">
+					<span class="btn"><input type="submit" value="{$lang->cmd_registration}" /></span>
+				</div>
+            </th>
+        </tr>
+</table>
+</form>
+
+<!--%import("filter/insert_config.xml")-->
+<form action="./" method="get" onsubmit="return procFilter(this, insert_config)">
+    <h4 class="xeAdmin">{$lang->antiaccess_header}</h4>
+    <table cellspacing="0" class="rowTable" summary="{$lang->antiaccess_header_summary}">
+    <caption>{$lang->antiaccess_caption} : header config</caption>
+        <tr>
+            <th scope="row"><div>{$lang->antiaccess_code}</div></th>
+            <td class="wide">
+                <label for="code403"><input type="radio" id="code403" name="code" value="403" checked="checked"|cond="$anti_config->header->code==403" /> 403</label>
+                <label for="code404"><input type="radio" id="code404" name="code" value="404" checked="checked"|cond="$anti_config->header->code==404" /> 404</label>
+                <p>{$lang->antiaccess_code_description}</p>
+            </td>
+        </tr>
+        <tr class="row">
+            <th scope="col"><div>{$lang->antiaccess_msg}</div></th>
+            <td class="wide">
+                <textarea name="msg" class="inputTypeTextArea fullWidth">{$anti_config->header->msg}</textarea>
+                <p>{$lang->antiaccess_msg_description}</p>
+            </td>
+        </tr>
+        <tr class="row">
+            <th scope="col"><div>{$lang->antiaccess_forward_url}</div></th>
+            <td class="wide">
+                <input type="text" name="antiaccess_forward_url" value="{$anti_config->header->forward_url}" class="inputTypeText w60" />
+                <p>{$lang->antiaccess_forward_url_description}</p>
+            </td>
+        </tr>
+    </table>
+
+    <h4 class="xeAdmin">{$lang->antiaccess_block}</h4>
+    <table cellspacing="0" class="rowTable" summary="{$lang->antiaccess_block_summary}">
+    <caption>{$lang->antiaccess_caption} : block config</caption>
+        <tr>
+            <th scope="col"><div>{$lang->antiaccess_limit_time}</div></th>
+            <td>
+                <input type="text" name="antiaccess_limit_time" value="{$anti_config->block->limit_time}" class="inputTypeText w60" />
+                <p>{$lang->antiaccess_limit_time_description}</p>
+            </td>
+        </tr>
+        <tr>
+            <th scope="col"><div>{$lang->antiaccess_limit_count}</div></th>
+            <td>
+                <input type="text" name="antiaccess_limit_count" value="{$anti_config->block->limit_count}" class="inputTypeText w60" />
+                <p>{$lang->antiaccess_limit_count_description}</p>
+            </td>
+        </tr>
+        <tr>
+            <th scope="col"><div>{$lang->antiaccess_limit_display}</div></th>
+            <td>
+                <input type="text" name="antiaccess_limit_display" value="{$anti_config->block->limit_display}" class="inputTypeText w60" />
+                <p>{$lang->antiaccess_limit_display_description}</p>
+            </td>
+        </tr>
+        <tr>
+            <th scope="col"><div>{$lang->antiaccess_limit_rss}</div></th>
+            <td>
+                <input type="text" name="antiaccess_limit_rss" value="{$anti_config->block->limit_rss}" class="inputTypeText w60" />
+                <p>{$lang->antiaccess_limit_rss_description}</p>
+            </td>
+        </tr>
+        <tr>
+            <th scope="col"><div>{$lang->antiaccess_limit_atom}</div></th>
+            <td>
+                <input type="text" name="antiaccess_limit_atom" value="{$anti_config->block->limit_atom}" class="inputTypeText w60" />
+                <p>{$lang->antiaccess_limit_atom_description}</p>
+            </td>
+        </tr>
+        <tr>
+            <th scope="col"><div>{$lang->antiaccess_limit_trackback}</div></th>
+            <td>
+                <input type="text" name="antiaccess_limit_trackback" value="{$anti_config->block->limit_trackback}" class="inputTypeText w60" />
+                <p>{$lang->antiaccess_limit_trackback_description}</p>
+            </td>
+        </tr>
+        <tr>
+            <th scope="col"><div>{$lang->antiaccess_limit_act}</div></th>
+            <td>
+                <input type="text" name="antiaccess_limit_act" value="{$anti_config->block->limit_act}" class="inputTypeText w60" />
+                <p>{$lang->antiaccess_limit_act_description}</p>
+            </td>
+        </tr>
+        <tr>
+            <th scope="col"><div>{$lang->antiaccess_limit_block}</div></th>
+            <td>
+                <input type="text" name="antiaccess_limit_block" value="{$anti_config->block->limit_block}" class="inputTypeText w60" />
+                <p>{$lang->antiaccess_limit_block_description}</p>
+            </td>
+        </tr>
+    </table>
+
+    <h4 class="xeAdmin">{$lang->antiaccess_not_act}</h4>
+    <table cellspacing="0" class="rowTable" summary="{$lang->antiaccess_not_act_summary}">
+    <caption>{$lang->antiaccess_caption} : not act config</caption>
+        <tr>
+            <th scope="col"><div>{$lang->antiaccess_not_act}</div></th>
+            <td>
+                <input type="text" name="not_act" value="{$anti_config->not_act}" class="inputTypeText w400" />
+                <p>{nl2br($lang->antiaccess_not_act_description)}</p>
+            </td>
+        </tr>
+    </table>
+
+    <h4 class="xeAdmin">{$lang->antiaccess_banned}</h4>
+    <table cellspacing="0" class="rowTable" summary="{$lang->antiaccess_banned_summary}">
+    <caption>{$lang->antiaccess_caption} : banned config</caption>
+        <tr>
+            <th scope="col"><div>{$lang->antiaccess_occur_count}</div></th>
+            <td>
+                <input type="text" name="antiaccess_occur_count" value="{$anti_config->banned->occur_count}" class="inputTypeText w60" />
+                <p>{$lang->antiaccess_occur_count_description}</p>
+            </td>
+        </tr>
+        <tr>
+            <th scope="col"><div>{$lang->antiaccess_public}</div></th>
+            <td>
+                <input type="checkbox" name="antiaccess_banned_public" value="Y" />
+                <p>{$lang->antiaccess_public_description}</p>
+            </td>
+        </tr>
+    </table>
+
+    <h4 class="xeAdmin">{$lang->antiaccess_white}</h4>
+    <table cellspacing="0" class="rowTable" summary="{$lang->antiaccess_white_summary}">
+    <caption>{$lang->antiaccess_caption} : white config</caption>
+        <tr>
+            <th scope="col"><div>{$lang->antiaccess_groups}</div></th>
+            <td>
+                <block loop="$group_list => $val">
+                <input type="checkbox" name="white_groups[]" id="group_{$val->group_srl}" value="{$val->group_srl}" checked="checked"|cond="$anti_config->white_groups[$val->group_srl]" /><label for="group_{$val->group_srl}">{$val->title}</label>
+                </block>
+                <p>{$lang->antiaccess_groups_description}</p>
+            </td>
+        </tr>
+        <tr>
+            <th scope="col"><div>{$lang->antiaccess_public}</div></th>
+            <td>
+                <input type="checkbox" name="antiaccess_white_public" value="Y" />
+                <p>{$lang->antiaccess_public_description}</p>
+            </td>
+        </tr>
+    </table>
+
+    <h4 class="xeAdmin">{$lang->antiaccess_cache}</h4>
+    <table cellspacing="0" class="rowTable" summary="{$lang->antiaccess_cache_summary}">
+    <caption>{$lang->antiaccess_caption} : cache config</caption>
+        <tr>
+            <th scope="col"><div>{$lang->antiaccess_cache_type}</div></th>
+            <td>
+                <select name="cache_type">
+                    <block loop="$lang->antiaccess_cache_select => $key, $val">
+                    <option value="{$key}" selected="selected"|cond="$anti_config->cache->cache_type==$key">{$val}</option>
+                    </block>
+                </select>
+                <p>{nl2br($lang->antiaccess_cache_type_description)}</p>
+            </td>
+        </tr>
+        <tr>
+            <th scope="col"><div>{$lang->antiaccess_cache_index}</div></th>
+            <td>
+                <select name="cache_index">
+                    <option value="0" selected="selected"|cond="$anti_config->cache->cache_index==0">{$lang->antiaccess_not_apply}</option>
+                    <option value="1" selected="selected"|cond="$anti_config->cache->cache_index==1">{$lang->antiaccess_apply}</option>
+                </select>
+                <p>{nl2br($lang->antiaccess_cache_index_description)}</p>
+            </td>
+        </tr>
+        <tr>
+            <th scope="col"><div>{$lang->antiaccess_cache_backup}</div></th>
+            <td>
+                <div><span class="green" cond="$index_bak=='complete'">{$index_bak}</span><span class="red" cond="$index_bak!='complete'">{$index_bak}</span></div>
+                <p>{$lang->antiaccess_cache_backup_description}</p>
+            </td>
+        </tr>
+        <tr>
+            <th scope="col"><div>{$lang->antiaccess_ftp_pass}</div></th>
+            <td>
+                <input type="password" name="ftp_password" value="" class="inputTypeText w150" />
+                <p>{nl2br($lang->antiaccess_ftp_pass_description)}</p>
+            </td>
+        </tr>
+    </table>
+
+    <h4 class="xeAdmin">{$lang->antiaccess_optimize}</h4>
+    <table cellspacing="0" class="rowTable" summary="{$lang->antiaccess_optimize_summary}">
+    <caption>{$lang->antiaccess_caption} : optimize config</caption>
+        <tr>
+            <th scope="col"><div>{$lang->antiaccess_optimize_date}</div></th>
+            <td>
+                <input type="input" name="antiaccess_optimize_date" value="{$anti_config->optimize->date}" class="inputTypeText w80" />
+                <p>{nl2br($lang->antiaccess_optimize_date_description)}</p>
+            </td>
+        </tr>
+    </table>
+
+    <table cellspacing="0" class="rowTable">
+        <tr>
+            <th class="button">
+                <span class="button black strong"><input type="submit" value="{$lang->cmd_registration}" accesskey="s" /></span>
+            </th>
+        </tr>
+    </table>
+</form>

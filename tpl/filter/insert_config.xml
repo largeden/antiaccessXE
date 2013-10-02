@@ -1,0 +1,30 @@
+<filter name="insert_config" module="antiaccess" act="procAntiaccessAdminInsertConfig" confirm_msg_code="confirm_submit">
+    <form>
+        <node target="antiaccess_limit_time" filter="number" />
+        <node target="antiaccess_limit_count" filter="number" />
+        <node target="antiaccess_limit_display" filter="number" />
+        <node target="antiaccess_limit_rss" filter="number" />
+        <node target="antiaccess_limit_atom" filter="number" />
+        <node target="antiaccess_limit_trackback" filter="number" />
+        <node target="antiaccess_limit_act" filter="number" />
+        <node target="antiaccess_limit_block" filter="number" />
+        <node target="antiaccess_occur_count" filter="number" />
+        <node target="antiaccess_optimize_date" filter="number" />
+    </form>
+    <parameter>
+        <param name="limit_time" target="antiaccess_limit_time" />
+        <param name="limit_count" target="antiaccess_limit_count" />
+        <param name="limit_display" target="antiaccess_limit_display" />
+        <param name="limit_rss" target="antiaccess_limit_rss" />
+        <param name="limit_atom" target="antiaccess_limit_atom" />
+        <param name="limit_trackback" target="antiaccess_limit_trackback" />
+        <param name="limit_act" target="antiaccess_limit_act" />
+        <param name="limit_block" target="antiaccess_limit_block" />
+        <param name="occur_count" target="antiaccess_occur_count" />
+        <param name="optimize_date" target="antiaccess_optimize_date" />
+    </parameter>
+    <response callback_func="complete">
+        <tag name="error" />
+        <tag name="message" />
+    </response>
+</filter>

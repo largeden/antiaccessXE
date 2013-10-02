@@ -1,0 +1,102 @@
+<include target="header.html" />
+
+<!--@if($order_type=='desc')-->
+{@ $order_type = 'asc' }
+<!--@else-->
+{@ $order_type = 'desc' }
+<!--@endif-->
+
+<block cond="$new_version">
+{@ Context::addHtmlHeader('
+    <script type="text/javascript">//<![CDATA[
+        var msg_antiaccess_new_version = "'.$lang->msg_antiaccess_new_version.'";
+    //]]></script>
+'); }
+</block>
+
+<!--%import("filter/delete_accessip.xml")-->
+<form action="./" method="post" onsubmit="return procFilter(this, delete_accessip)" enctype="multipart/form-data">
+<h4 class="xeAdmin">{$lang->antiaccess_accessip_list}</h4>
+    <table cellspacing="0" id="accessip_list" class="rowTable" summary="{$lang->antiaccess_accessip_list_summary}">
+    <caption>{$lang->antiaccess_caption} : Total {number_format($page_navigation->total_count)}, Page {number_format($page_navigation->cur_page)}/{number_format($page_navigation->total_page)}</caption>
+        <thead>
+            <tr>
+                <th scope="col"><div><a href="{getUrl('sort_index','access_srl','order_type',$order_type)}" title="{$lang->no}">{$lang->no}</a></div></th>
+                <th scope="col"><input type="checkbox" onclick="clickCheckBoxAll(this.form, 'cart'); return false;" /></th>
+                <th scope="col"><div><a href="{getUrl('sort_index','ipaddress','order_type',$order_type)}" title="{$lang->antiaccess_ipaddress}">{$lang->antiaccess_ipaddress}</a></div></th>
+                <th scope="col"><div>
+                <a href="{getUrl('sort_index','limit_count','order_type',$order_type)}" title="{$lang->antiaccess_limit_count}">total</a>
+                <a href="{getUrl('sort_index','limit_display','order_type',$order_type)}" title="{$lang->antiaccess_limit_display}">display</a>
+                <a href="{getUrl('sort_index','limit_rss','order_type',$order_type)}" title="{$lang->antiaccess_limit_rss}">rss</a><br />
+                <a href="{getUrl('sort_index','limit_atom','order_type',$order_type)}" title="{$lang->antiaccess_limit_atom}">atom</a>
+                <a href="{getUrl('sort_index','limit_trackback','order_type',$order_type)}" title="{$lang->antiaccess_limit_trackback}">trackback</a>
+                <a href="{getUrl('sort_index','limit_act','order_type',$order_type)}" title="{$lang->antiaccess_limit_act}">act</a>
+                </div></th>
+                <th scope="col"><div><a href="{getUrl('sort_index','block','order_type',$order_type)}" title="{$lang->antiaccess_block_mode}">{$lang->antiaccess_block_mode}</a></div></th>
+                <th scope="col"><div><a href="{getUrl('sort_index','occur_count','order_type',$order_type)}" title="{$lang->antiaccess_occur_count}">{$lang->antiaccess_occur_count}</a></div></th>
+                <th scope="col"><div>{$lang->antiaccess_ban_mode}</div></th>
+                <th scope="col"><div>{$lang->antiaccess_apply_mode}</div></th>
+                <th scope="col"><div><a href="{getUrl('sort_index','last_update','order_type',$order_type)}" title="{$lang->antiaccess_last_update}">{$lang->antiaccess_last_update}</a></div></th>
+                <th scope="col"><div><a href="{getUrl('sort_index','regdate','order_type',$order_type)}" title="{$lang->antiaccess_regdate}">{$lang->antiaccess_regdate}</a></div></th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <td colspan="10"><div class="fr"><span class="button blue"><input type="submit" value="{$lang->cmd_delete}" /></span></div></td>
+            </tr>
+        </tfoot>
+        <tbody>
+            <tr loop="$accessip_list => $no, $oAccessip">
+                <td>{$no}</td>
+                <td><input type="checkbox" name="cart" value="{$oAccessip->access_srl}" /></td>
+                <td><img src="{$tpl_path}img/flag/16/{strtolower($oAccessip->country_code)}.png" width="15" height="10" border="0" alt="{$oAccessip->country_code}" /> <a href="http://www.ip-adress.com/ip_tracer/{$oAccessip->ipaddress}" title="IP-address.com - IP Tracer and IP Locator" target="_blank">{$oAccessip->ipaddress}</a></td>
+                <td>
+                    <span class="red"|cond="$anti_config->block->limit_count && ($anti_config->block->limit_count<$oAccessip->limit_count)">{$oAccessip->limit_count}</span>
+                    <span class="red"|cond="$anti_config->block->limit_display && ($anti_config->block->limit_display<$oAccessip->limit_display)">{$oAccessip->limit_display}</span>
+                    <span class="red"|cond="$anti_config->block->limit_rss && ($anti_config->block->limit_rss<$oAccessip->limit_rss)">{$oAccessip->limit_rss}</span><br />
+                    <span class="red"|cond="$anti_config->block->limit_atom && ($anti_config->block->limit_atom<$oAccessip->limit_atom)">{$oAccessip->limit_atom}</span>
+                    <span class="red"|cond="$anti_config->block->limit_trackback && ($anti_config->block->limit_trackback<$oAccessip->limit_trackback)">{$oAccessip->limit_trackback}</span>
+                    <span class="red"|cond="$anti_config->block->limit_act && ($anti_config->block->limit_act<$oAccessip->limit_act)">{$oAccessip->limit_act}</span>
+                </td>
+                <td><block cond="$oAccessip->block=='Y'"><span class="red">{$lang->antiaccess_blocked}</span> <a href="#$antiaccess.unblock" id="block_{$no}" class="button small" title="{$oAccessip->ipaddress}"><span class="unblock">{$lang->antiaccess_unblock}</span></a></block></td>
+                <td>{$oAccessip->occur_count}</td>
+                <td>
+                <!--@if($oAccessip->white_apply=='Y')--><span class="green">{$lang->antiaccess_white}</span>
+                <!--@elseif($oAccessip->ban_apply=='Y')--><span class="red">{$lang->antiaccess_ban}</span><!--@endif-->
+                </td>
+                <td>
+                    <label for="ban_{$no}"><input type="checkbox" id="ban_{$no}" name="ban" value="{$oAccessip->ipaddress}" checked="checked"|cond="$oAccessip->ban_apply=='Y'" /> {$lang->antiaccess_ban}</label><br />
+                    <label for="white_{$no}"><input type="checkbox" id="white_{$no}" name="white" value="{$oAccessip->ipaddress}" checked="checked"|cond="$oAccessip->white_apply=='Y'" /> {$lang->antiaccess_white}</label>
+                </td>
+                <td class="date w100">{zdate($oAccessip->last_update, 'Y-m-d H:i:s', true)}</td>
+                <td class="date w100">{zdate($oAccessip->regdate, 'Y-m-d H:i:s', true)}</td>
+            </tr>
+        </tbody>
+    </table>
+</form>
+
+<!-- 페이지 네비게이션 -->
+<div class="pagination a1">
+    <a href="{getUrl('page','')}" class="prevEnd">{$lang->first_page}</a> 
+    <!--@while($page_no = $page_navigation->getNextPage())-->
+        <!--@if($page == $page_no)-->
+            <strong>{$page_no}</strong> 
+        <!--@else-->
+            <a href="{getUrl('page',$page_no)}">{$page_no}</a> 
+        <!--@end-->
+    <!--@end-->
+    <a href="{getUrl('page',$page_navigation->last_page)}" class="nextEnd">{$lang->last_page}</a>
+</div>
+
+<!-- 검색 -->
+<div class="tCenter">
+    <form action="./" method="get" class="adminSearch">
+    <input type="hidden" name="module" value="{$module}" />
+    <input type="hidden" name="act" value="{$act}" />
+        <fieldset>
+            <input type="text" name="search_keyword" value="{htmlspecialchars($search_keyword)}" class="inputTypeText" />
+            <span class="button blue"><input type="submit" value="{$lang->cmd_search}" /></span>
+            <a href="{getUrl('','module',$module,'act',$act)}" class="button black"><span>{$lang->cmd_cancel}</span></a>
+        </fieldset>
+    </form>
+</div>

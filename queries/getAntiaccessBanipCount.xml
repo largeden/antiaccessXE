@@ -1,0 +1,16 @@
+<query id="getAntiaccessBanipCount" action="select">
+    <tables>
+        <table name="antiaccess_ban_ip" />
+    </tables>
+    <columns>
+        <column name="count(*)" alias="count" />
+    </columns>
+    <conditions>
+        <condition operation="equal" column="ban_srl" var="ban_srl" filter="number" pipe="where" />
+        <condition operation="equal" column="source_host" var="source_host" pipe="and" />
+        <condition operation="equal" column="follow_host" var="follow_host" pipe="and" />
+        <condition operation="equal" column="ipaddress" var="ipaddress" pipe="and" />
+        <condition operation="equal" column="apply" var="apply" pipe="and" />
+    </conditions>
+    <navigation />
+</query>

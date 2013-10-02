@@ -1,0 +1,8 @@
+<filter name="delete_banip" module="antiaccess" act="procAntiaccessAdminDeleteBanip" confirm_msg_code="confirm_delete">
+    <form />
+    <parameter />
+    <response callback_func="complete">
+        <tag name="error" />
+        <tag name="message" />
+    </response>
+</filter>

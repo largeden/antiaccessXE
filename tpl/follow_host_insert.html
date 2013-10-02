@@ -1,0 +1,48 @@
+<include target="header.html" />
+
+<!--%import("filter/insert_followhost.xml")-->
+<form action="./" method="get" onsubmit="return procFilter(this, insert_followhost)">
+<input type="hidden" name="page" value="{$page}" />
+<input type="hidden" name="follow_srl" value="{$followhost_info->follow_srl}" />
+    <h4 class="xeAdmin">{$lang->antiaccess_followhost_config}</h4>
+    <table cellspacing="0" id="follow_host" class="rowTable" summary="{$lang->antiaccess_followhost_config_summary}">
+    <caption>{$lang->antiaccess_caption} : header config</caption>
+        <tr>
+            <th scope="col"><div>{$lang->antiaccess_followhost}</div></th>
+            <td class="wide">
+                <input type="text" name="antiaccess_followhost" value="{$followhost_info->host}" class="inputTypeText w400" readonly="readonly"|cond="$followhost_info->host" />
+                <p>{$lang->antiaccess_followhost_description}</p>
+            </td>
+        </tr>
+        <tr>
+            <th scope="col"><div>{$lang->antiaccess_followhost_state}</div></th>
+            <td class="wide">
+                {$lang->antiaccess_followhost_state_code[$followhost_info->state]} <a href="#$antiaccess.synchronization" id="sync_{$no}" class="button small" title="{$followhost_info->follow_srl}" cond="in_array($followhost_info->state, array(104,504))"><span class="sync">{$lang->antiaccess_sync}</span></a>
+                <p>{$lang->antiaccess_followhost_state_description}</p>
+            </td>
+        </tr>
+        <tr>
+            <th scope="col"><div>{nl2br($lang->antiaccess_followhost_my_level)}</div></th>
+            <td class="wide">
+                <select name="my_level">
+                    <block loop="$lang->antiaccess_followhost_level_code => $key, $val">
+                    <option value="{$key}" selected="selected"|cond="$followhost_info->my_level==$key">{$val}</option>
+                    </block>
+                </select>
+                <p>{nl2br($lang->antiaccess_followhost_my_level_description)}</p>
+            </td>
+        </tr>
+        <tr>
+            <th scope="col"><div>{nl2br($lang->antiaccess_followhost_follow_level)}</div></th>
+            <td class="wide">
+                {$lang->antiaccess_followhost_level_code[$followhost_info->follow_level]}
+                <p>{nl2br($lang->antiaccess_followhost_follow_level_description)}</p>
+            </td>
+        </tr>
+        <tr>
+            <th class="button" colspan="2">
+                <span class="button black strong"><input type="submit" value="{$lang->cmd_registration}" accesskey="s" /></span>
+            </th>
+        </tr>
+    </table>
+</form>

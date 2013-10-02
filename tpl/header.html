@@ -1,0 +1,18 @@
+<!--%import("css/default.css")-->
+<!--%import("js/common.js")-->
+<!--%import("js/antiaccess.js")-->
+
+<h3 class="xeAdmin">{$lang->antiaccess} <span class="gray">{$lang->cmd_management}</span></h3>
+
+<div class="infoText">{nl2br($lang->antiaccess_description)}</div>
+
+<div class="tab_menu">
+    <ul class="localNavigation">
+        <li class="on"|cond="$act=='dispAntiaccessAdminConfig'"><a href="{getUrl('','module','admin','act','dispAntiaccessAdminConfig')}">{$lang->antiaccess_config}</a></li>
+        <li class="on"|cond="$act=='dispAntiaccessAdminAccessip'"><a href="{getUrl('','module','admin','act','dispAntiaccessAdminAccessip')}">{$lang->antiaccess_access_ip}</a></li>
+        <li class="on"|cond="$act=='dispAntiaccessAdminBanip'"><a href="{getUrl('','module','admin','act','dispAntiaccessAdminBanip')}">{$lang->antiaccess_ban_ip}</a></li>
+        <li class="on"|cond="$act=='dispAntiaccessAdminWhiteip'"><a href="{getUrl('','module','admin','act','dispAntiaccessAdminWhiteip')}">{$lang->antiaccess_white_ip}</a></li>
+        <li class="on"|cond="in_array($act, array('dispAntiaccessAdminFollowhost','dispAntiaccessAdminInsertFollowhost'))"><a href="{getUrl('','module','admin','act','dispAntiaccessAdminFollowhost')}">{$lang->antiaccess_follow_host}</a></li>
+        <li class="on"|cond="$act=='dispAntiaccessAdminBanhost'"><a href="{getUrl('','module','admin','act','dispAntiaccessAdminBanhost')}">{$lang->antiaccess_ban_host}</a></li>
+    </ul>
+</div>

@@ -1,0 +1,18 @@
+<query id="updateAntiaccessFollowhost" action="update">
+    <tables>
+        <table name="antiaccess_follow_host" />
+    </tables>
+    <columns>
+        <column name="follow_key" var="follow_key" />
+        <column name="state" var="state" filter="number" />
+        <column name="my_level" var="my_level" filter="number" />
+        <column name="follow_level" var="follow_level" filter="number" />
+        <column name="last_update" var="last_update" default="curdate()" />
+        <column name="rank" var="rank" />
+        <column name="extra_vars" var="extra_vars" />
+    </columns>
+    <conditions>
+        <condition operation="equal" column="follow_srl" var="follow_srl" filter="number" pipe="where" />
+        <condition operation="equal" column="host" var="host" pipe="and" />
+    </conditions>
+</query>

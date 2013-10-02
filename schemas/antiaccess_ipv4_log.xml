@@ -1,0 +1,9 @@
+<table name="antiaccess_ipv4_log">
+    <column name="ipaddress" type="char" size="15" notnull="notnull" index="idx_ipaddress" />
+    <column name="display" type="number" size="1" default="0" notnull="notnull" />
+    <column name="rss" type="number" size="1" default="0" notnull="notnull" />
+    <column name="atom" type="number" size="1" default="0" notnull="notnull" />
+    <column name="trackback" type="number" size="1" default="0" notnull="notnull" />
+    <column name="act" type="number" size="1" default="0" notnull="notnull" />
+    <column name="regdate" type="date" index="idx_regdate" />
+</table>

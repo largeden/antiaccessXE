@@ -1,0 +1,17 @@
+<query id="getAntiaccessIpv4Log" action="select">
+    <tables>
+        <table name="antiaccess_ipv4_log" />
+    </tables>
+    <columns>
+        <column name="count(ipaddress)" alias="count" />
+        <column name="sum(display)" alias="display" />
+        <column name="sum(rss)" alias="rss" />
+        <column name="sum(atom)" alias="atom" />
+        <column name="sum(trackback)" alias="trackback" />
+        <column name="sum(act)" alias="act" />
+    </columns>
+    <conditions>
+        <condition operation="equal" column="ipaddress" var="ipaddress" pipe="where" />
+    </conditions>
+    <navigation />
+</query>

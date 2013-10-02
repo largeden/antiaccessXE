@@ -1,0 +1,102 @@
+<include target="header.html" />
+
+<!--@if($order_type == 'desc')-->
+{@ $order_type = 'asc' }
+<!--@else-->
+{@ $order_type = 'desc' }
+<!--@endif-->
+
+<!--%import("filter/delete_banhost.xml")-->
+<form action="./" method="post" onsubmit="return procFilter(this, delete_banhost)" enctype="multipart/form-data">
+<h4 class="xeAdmin">{$lang->antiaccess_banhost_list}</h4>
+    <table cellspacing="0" id="banhost_list" class="rowTable" summary="{$lang->antiaccess_banhost_list_summary}">
+    <caption>{$lang->antiaccess_caption} : Total {number_format($page_navigation->total_count)}, Page {number_format($page_navigation->cur_page)}/{number_format($page_navigation->total_page)}</caption>
+        <thead>
+            <tr>
+                <th scope="col"><div><a href="{getUrl('sort_index','host_srl','order_type',$order_type)}" title="{$lang->no}">{$lang->no}</a></div></th>
+                <th scope="col"><input type="checkbox" onclick="clickCheckBoxAll(this.form, 'cart'); return false;" /></th>
+                <th scope="col"><div><a href="{getUrl('sort_index','host','order_type',$order_type)}" title="{$lang->antiaccess_host}">{$lang->antiaccess_host}</a></div></th>
+                <th scope="col"><div><a href="{getUrl('sort_index','ban_type','order_type',$order_type)}" title="{$lang->antiaccess_ban_type}">{$lang->antiaccess_ban_type}</a></div></th>
+                <th scope="col"><div><a href="{getUrl('sort_index','white_type','order_type',$order_type)}" title="{$lang->antiaccess_white_type}">{$lang->antiaccess_white_type}</a></div></th>
+                <th scope="col"><div><a href="{getUrl('sort_index','regdate','order_type',$order_type)}" title="{$lang->antiaccess_regdate}">{$lang->antiaccess_regdate}</a></div></th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <td colspan="9"><div class="fr"><span class="button blue"><input type="submit" value="{$lang->cmd_delete}" /></span></div></td>
+            </tr>
+        </tfoot>
+        <tbody>
+            <tr loop="$banhost_list => $no, $oBanhost">
+                <td>{$no}</td>
+                <td><input type="checkbox" name="cart" value="{$oBanhost->host_srl}" /></td>
+                <td><a href="http://{$oBanhost->host}" title="{$oBanhost->host}" target="_blank">{$oBanhost->host}</a></td>
+                <td><label for="ban_type_{$no}"><input type="checkbox" id="ban_type_{$no}" name="ban_type" value="{$oBanhost->host_srl}" checked="checked"|cond="$oBanhost->ban_type=='Y'" /> {$lang->antiaccess_unregistered}</label>
+                </td>
+                <td><label for="white_type_{$no}"><input type="checkbox" id="white_type_{$no}" name="white_type" value="{$oBanhost->host_srl}" checked="checked"|cond="$oBanhost->white_type=='Y'" /> {$lang->antiaccess_unregistered}</label>
+                </td>
+                <td class="date">{zdate($oBanhost->regdate, 'Y-m-d H:i:s', true)}</td>
+            </tr>
+        </tbody>
+    </table>
+</form>
+
+<!-- 페이지 네비게이션 -->
+<div class="pagination a1">
+    <a href="{getUrl('page','')}" class="prevEnd">{$lang->first_page}</a> 
+    <!--@while($page_no = $page_navigation->getNextPage())-->
+        <!--@if($page == $page_no)-->
+            <strong>{$page_no}</strong> 
+        <!--@else-->
+            <a href="{getUrl('page',$page_no)}">{$page_no}</a> 
+        <!--@end-->
+    <!--@end-->
+    <a href="{getUrl('page',$page_navigation->last_page)}" class="nextEnd">{$lang->last_page}</a>
+</div>
+
+<!-- 검색 -->
+<div class="tCenter">
+    <form action="./" method="get" class="adminSearch">
+    <input type="hidden" name="module" value="{$module}" />
+    <input type="hidden" name="act" value="{$act}" />
+        <fieldset>
+            <input type="text" name="search_keyword" value="{htmlspecialchars($search_keyword)}" class="inputTypeText" />
+            <span class="button blue"><input type="submit" value="{$lang->cmd_search}" /></span>
+            <a href="{getUrl('','module',$module,'act',$act)}" class="button black"><span>{$lang->cmd_cancel}</span></a>
+        </fieldset>
+    </form>
+</div>
+
+<!--%import("filter/insert_banhost.xml")-->
+<form action="./" method="get" onsubmit="return procFilter(this, insert_banhost)">
+    <h4 class="xeAdmin">{$lang->antiaccess_banhost_config}</h4>
+    <table cellspacing="0" class="rowTable" summary="{$lang->antiaccess_banhost_config_summary}">
+    <caption>{$lang->antiaccess_caption} : ban host config</caption>
+        <tr>
+            <th scope="col"><div>{$lang->antiaccess_banhost}</div></th>
+            <td class="wide">
+                <input type="text" name="host" value="" class="inputTypeText w400" />
+                <p>{$lang->antiaccess_banhost_description}</p>
+            </td>
+        </tr>
+        <tr>
+            <th scope="col"><div>{$lang->antiaccess_ban_type}</div></th>
+            <td class="wide">
+                <label for="ban_type"><input type="checkbox" id="ban_type" name="ban_type" value="Y" /> {$lang->antiaccess_unregistered}</label>
+                <p>{$lang->antiaccess_ban_type_description}</p>
+            </td>
+        </tr>
+        <tr>
+            <th scope="col"><div>{$lang->antiaccess_white_type}</div></th>
+            <td class="wide">
+                <label for="white_type"><input type="checkbox" id="white_type" name="white_type" value="Y" /> {$lang->antiaccess_unregistered}</label>
+                <p>{$lang->antiaccess_white_type_description}</p>
+            </td>
+        </tr>
+        <tr>
+            <th class="button" colspan="2">
+                <span class="button black strong"><input type="submit" value="{$lang->cmd_registration}" accesskey="s" /></span>
+            </th>
+        </tr>
+    </table>
+</form>

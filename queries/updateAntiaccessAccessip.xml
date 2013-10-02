@@ -1,0 +1,25 @@
+<query id="updateAntiaccessAccessip" action="update">
+    <tables>
+        <table name="antiaccess_access_ip" />
+    </tables>
+    <columns>
+        <column name="limit_count" var="limit_count" filter="number" maxlength="11" />
+        <column name="limit_display" var="limit_display" filter="number" maxlength="11" />
+        <column name="limit_rss" var="limit_rss" filter="number" maxlength="11" />
+        <column name="limit_atom" var="limit_atom" filter="number" maxlength="11" />
+        <column name="limit_trackback" var="limit_trackback" filter="number" maxlength="11" />
+        <column name="limit_act" var="limit_act" filter="number" maxlength="11" />
+        <column name="module_srl" var="module_srl" filter="number" maxlength="11" />
+        <column name="document_srl" var="document_srl" filter="number" maxlength="11" />
+        <column name="act" var="act" maxlength="40" />
+        <column name="page" var="page" filter="number" maxlength="11" />
+        <column name="block" var="block" />
+        <column name="occur_count" var="occur_count" filter="number" maxlength="11" />
+        <column name="last_update" var="last_update" default="curdate()" />
+        <column name="country_code" var="country_code" notnull="notnull" />
+    </columns>
+    <conditions>
+        <condition operation="equal" column="access_srl" var="access_srl" filter="number" pipe="where" />
+        <condition operation="equal" column="ipaddress" var="ipaddress" pipe="and" />
+    </conditions>
+</query>

@@ -1,0 +1,102 @@
+<include target="header.html" />
+
+<!--@if($order_type == 'desc')-->
+{@ $order_type = 'asc' }
+<!--@else-->
+{@ $order_type = 'desc' }
+<!--@endif-->
+
+<!--%import("filter/delete_whiteip.xml")-->
+<form action="./" method="post" onsubmit="return procFilter(this, delete_whiteip)" enctype="multipart/form-data">
+<h4 class="xeAdmin">{$lang->antiaccess_whiteip_list}</h4>
+    <table cellspacing="0" id="whiteip_list" class="rowTable" summary="{$lang->antiaccess_whiteip_list_summary}">
+    <caption>{$lang->antiaccess_caption} : Total {number_format($page_navigation->total_count)}, Page {number_format($page_navigation->cur_page)}/{number_format($page_navigation->total_page)}</caption>
+        <thead>
+            <tr>
+                <th scope="col"><div><a href="{getUrl('sort_index','white_srl','order_type',$order_type)}" title="{$lang->no}">{$lang->no}</a></div></th>
+                <th scope="col"><input type="checkbox" onclick="clickCheckBoxAll(this.form, 'cart'); return false;" /></th>
+                <th scope="col"><div><a href="{getUrl('sort_index','source_host','order_type',$order_type)}" title="{$lang->antiaccess_source_host}">{$lang->antiaccess_source_host}</a></div></th>
+                <th scope="col"><div><a href="{getUrl('sort_index','follow_host','order_type',$order_type)}" title="{$lang->antiaccess_follow_host}">{$lang->antiaccess_follow_host}</a></div></th>
+                <th scope="col"><div><a href="{getUrl('sort_index','ipaddress','order_type',$order_type)}" title="{$lang->antiaccess_ipaddress}">{$lang->antiaccess_ipaddress}</a></div></th>
+                <th scope="col"><div><a href="{getUrl('sort_index','apply','order_type',$order_type)}" title="{$lang->antiaccess_apply_mode}">{$lang->antiaccess_apply_mode}</a></div></th>
+                <th scope="col"><div><a href="{getUrl('sort_index','public','order_type',$order_type)}" title="{$lang->antiaccess_public_mode}">{$lang->antiaccess_public_mode}</a></div></th>
+                <th scope="col"><div><a href="{getUrl('sort_index','regdate','order_type',$order_type)}" title="{$lang->antiaccess_regdate}">{$lang->antiaccess_regdate}</a></div></th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <td colspan="9"><div class="fr"><span class="button blue"><input type="submit" value="{$lang->cmd_delete}" /></span></div></td>
+            </tr>
+        </tfoot>
+        <tbody>
+            <tr loop="$whiteip_list => $no, $oWhiteip">
+                <td>{$no}</td>
+                <td><input type="checkbox" name="cart" value="{$oWhiteip->white_srl}" /></td>
+                <td><a href="http://{$oWhiteip->source_host}" title="{$oWhiteip->source_host}" target="_blank">{$oWhiteip->source_host}</a></td>
+                <td><block cond="$oWhiteip->follow_host"><a href="http://{$oWhiteip->follow_host}" title="{$oWhiteip->follow_host}" target="_blank">{$oWhiteip->follow_host}</a></block></td>
+                <td><img src="{$tpl_path}img/flag/16/{strtolower($oWhiteip->country_code)}.png" width="15" height="10" border="0" alt="{$oWhiteip->country_code}" /> <a href="http://www.ip-adress.com/ip_tracer/{$oWhiteip->ipaddress}" title="IP-address.com - IP Tracer and IP Locator" target="_blank">{$oWhiteip->ipaddress}</a></td>
+                <td>
+                    <label for="apply_{$no}"><input type="radio" id="apply_{$no}" name="apply_{$no}" value="Y|@|{$oWhiteip->white_srl}" checked="checked"|cond="$oWhiteip->apply=='Y'" /> {$lang->antiaccess_apply}</label>
+                    <label for="not_apply_{$no}"><input type="radio" id="not_apply_{$no}" name="apply_{$no}" value="N|@|{$oWhiteip->white_srl}" checked="checked"|cond="$oWhiteip->apply=='N'" /> {$lang->antiaccess_not_apply}</label>
+                </td>
+                <td>
+					<label for="public_{$no}"><input cond="!$oWhiteip->follow_host" type="checkbox" id="public_{$no}" name="public_{$no}" value="{$oWhiteip->white_srl}" checked="checked"|cond="$oWhiteip->public=='Y'" /> {$lang->antiaccess_public}</label>
+				</td>
+                <td class="date">{zdate($oWhiteip->regdate, 'Y-m-d H:i:s', true)}</td>
+            </tr>
+        </tbody>
+    </table>
+</form>
+
+<!-- 페이지 네비게이션 -->
+<div class="pagination a1">
+    <a href="{getUrl('page','')}" class="prevEnd">{$lang->first_page}</a>
+    <!--@while($page_no = $page_navigation->getNextPage())-->
+        <!--@if($page == $page_no)-->
+            <strong>{$page_no}</strong>
+        <!--@else-->
+            <a href="{getUrl('page',$page_no)}">{$page_no}</a>
+        <!--@end-->
+    <!--@end-->
+    <a href="{getUrl('page',$page_navigation->last_page)}" class="nextEnd">{$lang->last_page}</a>
+</div>
+
+<!-- 검색 -->
+<div class="tCenter">
+    <form action="./" method="get" class="adminSearch">
+    <input type="hidden" name="module" value="{$module}" />
+    <input type="hidden" name="act" value="{$act}" />
+        <fieldset>
+            <input type="text" name="search_keyword" value="{htmlspecialchars($search_keyword)}" class="inputTypeText" />
+            <span class="button blue"><input type="submit" value="{$lang->cmd_search}" /></span>
+            <a href="{getUrl('','module',$module,'act',$act)}" class="button black"><span>{$lang->cmd_cancel}</span></a>
+        </fieldset>
+    </form>
+</div>
+
+<!--%import("filter/insert_whiteip.xml")-->
+<form action="./" method="get" onsubmit="return procFilter(this, insert_whiteip)">
+    <h4 class="xeAdmin">{$lang->antiaccess_whiteip_config}</h4>
+    <table cellspacing="0" class="rowTable" summary="{$lang->antiaccess_whiteip_config_summary}">
+    <caption>{$lang->antiaccess_caption} : white ip config</caption>
+        <tr>
+            <th scope="col"><div>{$lang->antiaccess_whiteip}</div></th>
+            <td class="wide">
+                <input type="text" name="ipaddress" value="" class="inputTypeText w120" />
+                <p>{$lang->antiaccess_whiteip_description}</p>
+            </td>
+        </tr>
+        <tr>
+            <th scope="col"><div>{$lang->antiaccess_public}</div></th>
+            <td class="wide">
+                <input type="checkbox" name="public" value="Y" />
+                <p>{$lang->antiaccess_public_description}</p>
+            </td>
+        </tr>
+        <tr>
+            <th class="button" colspan="2">
+                <span class="button black strong"><input type="submit" value="{$lang->cmd_registration}" accesskey="s" /></span>
+            </th>
+        </tr>
+    </table>
+</form>

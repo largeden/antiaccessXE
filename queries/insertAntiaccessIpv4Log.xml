@@ -1,0 +1,14 @@
+<query id="insertAntiaccessIpv4Log" action="insert">
+    <tables>
+        <table name="antiaccess_ipv4_log" />
+    </tables>
+    <columns>
+        <column name="ipaddress" var="ipaddress" notnull="notnull" />
+        <column name="display" var="display" default="0" filter="number" maxlength="11" />
+        <column name="rss" var="rss" default="0" filter="number" maxlength="11" />
+        <column name="atom" var="atom" default="0" filter="number" maxlength="11" />
+        <column name="trackback" var="trackback" default="0" filter="number" maxlength="11" />
+        <column name="act" var="act" default="0" filter="number" maxlength="11" />
+        <column name="regdate" var="regdate" default="curdate()" />
+    </columns>
+</query>

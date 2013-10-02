@@ -1,0 +1,10 @@
+<table name="antiaccess_white_ip">
+    <column name="white_srl" type="number" size="11" notnull="notnull" primary_key="primary_key" />
+    <column name="ipaddress" type="char" size="15" notnull="notnull" index="idx_ipaddress" />
+    <column name="country_code" type="char" size="2" notnull="notnull" />
+    <column name="source_host" type="varchar" size="250" notnull="notnull" />
+    <column name="follow_host" type="varchar" size="250" notnull="notnull" />
+    <column name="apply" type="char" size="1" default="N" notnull="notnull" />
+    <column name="public" type="char" size="1" default="N" notnull="notnull" />
+    <column name="regdate" type="date" index="idx_regdate" />
+</table>

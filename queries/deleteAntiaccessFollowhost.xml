@@ -1,0 +1,8 @@
+<query id="deleteAntiaccessFollowhost" action="delete">
+    <tables>
+        <table name="antiaccess_follow_host" />
+    </tables>
+    <conditions>
+        <condition operation="in" column="follow_srl" var="follow_srl" filter="number" notnull="notnull" />
+    </conditions>
+</query>

@@ -1,0 +1,10 @@
+<query id="deleteAntiaccessWhiteip" action="delete">
+    <tables>
+        <table name="antiaccess_white_ip" />
+    </tables>
+    <conditions>
+        <condition operation="in" column="white_srl" var="white_srl" filter="number" pipe="where" />
+        <condition operation="equal" column="ipaddress" var="ipaddress" pipe="and" />
+        <condition operation="equal" column="source_host" var="source_host" pipe="and" />
+    </conditions>
+</query>

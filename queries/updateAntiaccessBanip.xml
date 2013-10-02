@@ -1,0 +1,16 @@
+<query id="updateAntiaccessBanip" action="update">
+    <tables>
+        <table name="antiaccess_ban_ip" />
+    </tables>
+    <columns>
+        <column name="apply" var="apply" />
+        <column name="country_code" var="country_code" />
+        <column name="public" var="public" />
+    </columns>
+    <conditions>
+        <condition operation="equal" column="ban_srl" var="ban_srl" filter="number" pipe="where" />
+        <condition operation="equal" column="source_host" var="source_host" pipe="and" />
+        <condition operation="equal" column="follow_host" var="follow_host" pipe="and" />
+        <condition operation="equal" column="ipaddress" var="ipaddress" pipe="and" />
+    </conditions>
+</query>

@@ -1,0 +1,10 @@
+<filter name="insert_banhost" module="antiaccess" act="procAntiaccessAdminInsertBanhost" confirm_msg_code="confirm_submit">
+    <form>
+        <node target="host" required="true" />
+    </form>
+    <parameter />
+    <response callback_func="complete">
+        <tag name="error" />
+        <tag name="message" />
+    </response>
+</filter>

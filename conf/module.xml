@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<module>
+    <grants />
+    <permissions>
+        <permission action="procAntiaccessAdminInsertConfig" target="manager" />
+        <permission action="procAntiaccessAdminInsertCountry" target="manager" />
+        <permission action="procAntiaccessAdminInsertUse" target="manager" />
+        <permission action="procAntiaccessAdminInsertBanip" target="manager" />
+        <permission action="procAntiaccessAdminUpdateBanipApply" target="manager" />
+        <permission action="procAntiaccessAdminDeleteBanip" target="manager" />
+        <permission action="procAntiaccessAdminUpdateBanipPublic" target="manager" />
+        <permission action="procAntiaccessAdminInsertWhiteip" target="manager" />
+        <permission action="procAntiaccessAdminUpdateWhiteipApply" target="manager" />
+        <permission action="procAntiaccessAdminDeleteWhiteip" target="manager" />
+        <permission action="procAntiaccessAdminUpdateWhiteipPublic" target="manager" />
+        <permission action="procAntiaccessAdminUpdateAccessipApply" target="manager" />
+        <permission action="procAntiaccessAdminDeleteAccessip" target="manager" />
+        <permission action="procAntiaccessAdminUpdateAccessipUnblock" target="manager" />
+        <permission action="procAntiaccessAdminInsertBanhost" target="manager" />
+        <permission action="procAntiaccessAdminDeleteBanhost" target="manager" />
+        <permission action="procAntiaccessAdminUpdateBanhostType" target="manager" />
+        <permission action="procAntiaccessAdminInsertFollowhost" target="manager" />
+        <permission action="procAntiaccessAdminDeleteFollowhost" target="manager" />
+        <permission action="procAntiaccessAdminSynchronization" target="manager" />
+    </permissions>
+    <actions>
+        <action name="dispAntiaccessAdminAccessip" type="view" standalone="true" admin_index="true" />
+        <action name="dispAntiaccessAdminConfig" type="view" standalone="true" />
+        <action name="dispAntiaccessAdminBanip" type="view" standalone="true" />
+        <action name="dispAntiaccessAdminWhiteip" type="view" standalone="true" />
+        <action name="dispAntiaccessAdminBanhost" type="view" standalone="true" />
+        <action name="dispAntiaccessAdminFollowhost" type="view" standalone="true" />
+        <action name="getAntiaccessBanipApi" type="model" standalone="true" />
+        <action name="setAntiaccessBanipApi" type="controller" standalone="true" />
+        <action name="getAntiaccessWhiteipApi" type="model" standalone="true" />
+        <action name="setAntiaccessWhiteipApi" type="controller" standalone="true" />
+        <action name="getAntiaccessFollowCall" type="model" standalone="true" />
+        <action name="procAntiaccessAdminInsertConfig" type="controller" standalone="true" />
+        <action name="procAntiaccessAdminInsertCountry" type="controller" standalone="true" />
+        <action name="procAntiaccessAdminInsertUse" type="controller" standalone="true" />
+        <action name="procAntiaccessAdminInsertBanip" type="controller" standalone="true" />
+        <action name="procAntiaccessAdminUpdateBanipApply" type="controller" standalone="true" />
+        <action name="procAntiaccessAdminDeleteBanip" type="controller" standalone="true" />
+        <action name="procAntiaccessAdminUpdateBanipPublic" type="controller" standalone="true" />
+        <action name="procAntiaccessAdminInsertWhiteip" type="controller" standalone="true" />
+        <action name="procAntiaccessAdminUpdateWhiteipApply" type="controller" standalone="true" />
+        <action name="procAntiaccessAdminDeleteWhiteip" type="controller" standalone="true" />
+        <action name="procAntiaccessAdminUpdateWhiteipPublic" type="controller" standalone="true" />
+        <action name="procAntiaccessAdminUpdateAccessipApply" type="controller" standalone="true" />
+        <action name="procAntiaccessAdminDeleteAccessip" type="controller" standalone="true" />
+        <action name="procAntiaccessAdminUpdateAccessipUnblock" type="controller" standalone="true" />
+        <action name="procAntiaccessAdminInsertBanhost" type="controller" standalone="true" />
+        <action name="procAntiaccessAdminDeleteBanhost" type="controller" standalone="true" />
+        <action name="procAntiaccessAdminUpdateBanhostType" type="controller" standalone="true" />
+        <action name="dispAntiaccessAdminInsertFollowhost" type="view" standalone="true" />
+        <action name="procAntiaccessAdminInsertFollowhost" type="controller" standalone="true" />
+        <action name="procAntiaccessAdminDeleteFollowhost" type="controller" standalone="true" />
+        <action name="dispAntiaccessAdminDeleteFollowhost" type="view" standalone="true" />
+        <action name="procAntiaccessAdminSynchronization" type="controller" standalone="true" />
+        <action name="procAntiaccess" type="controller" standalone="true" />
+        <action name="procAntiaccessSync" type="controller" standalone="true" />
+        <action name="procAntiaccessRankCheck" type="controller" standalone="true" />
+        <action name="procAntiaccessRankCheckApi" type="controller" standalone="true" />
+    </actions>
+</module>

@@ -1,0 +1,12 @@
+<query id="insertAntiaccessBanhost" action="insert">
+    <tables>
+        <table name="antiaccess_ban_host" />
+    </tables>
+    <columns>
+        <column name="host_srl" var="host_srl" filter="number" notnull="notnull" />
+        <column name="host" var="host" notnull="notnull" />
+        <column name="ban_type" var="ban_type" default="N" />
+        <column name="white_type" var="white_type" default="N" />
+        <column name="regdate" var="regdate" default="curdate()" />
+    </columns>
+</query>

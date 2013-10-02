@@ -1,0 +1,30 @@
+<query id="getAntiaccessWhiteipList" action="select">
+    <tables>
+        <table name="antiaccess_white_ip" />
+    </tables>
+    <columns>
+        <column name="*" />
+    </columns>
+    <conditions>
+        <condition operation="equal" column="white_srl" var="white_srl" filter="number" pipe="where" />
+        <condition operation="equal" column="source_host" var="source_host" pipe="and" />
+        <condition operation="equal" column="follow_host" var="follow_host" pipe="and" />
+        <condition operation="equal" column="ipaddress" var="ipaddress" pipe="and" />
+        <condition operation="equal" column="apply" var="apply" pipe="and" />
+        <condition operation="in" column="follow_host" var="is_follow_host" pipe="and" />
+        <condition operation="notin" column="follow_host" var="not_follow_host" pipe="and" />
+        <group pipe="and">
+            <condition operation="like" column="source_host" var="s_source_host" pipe="or" />
+            <condition operation="like" column="follow_host" var="s_follow_host" pipe="or" />
+            <condition operation="like" column="ipaddress" var="s_ipaddress" pipe="or" />
+            <condition operation="equal" column="apply" var="s_apply" pipe="or" />
+            <condition operation="like_prefix" column="regdate" var="s_regdate" pipe="or" />
+        </group>
+    </conditions>
+    <navigation>
+        <index var="sort_index" default="white_srl" order="order_type" />
+        <list_count var="list_count" default="20" />
+        <page_count var="page_count" default="10" />
+        <page var="page" default="1" />
+    </navigation>
+</query>

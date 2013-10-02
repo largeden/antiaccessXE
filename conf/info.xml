@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module version="0.2">
+    <title xml:lang="ko">anti-accessXE</title>
+    <title xml:lang="en">anti-accessXE</title>
+    <title xml:lang="zh-CN">anti-accessXE</title>
+    <title xml:lang="jp">anti-accessXE</title>
+    <title xml:lang="es">anti-accessXE</title>
+    <title xml:lang="ru">anti-accessXE</title>
+    <title xml:lang="fr">anti-accessXE</title>
+    <title xml:lang="zh-TW">anti-accessXE</title>
+    <title xml:lang="vi">anti-accessXE</title>
+    <title xml:lang="mn">anti-accessXE</title>
+    <description xml:lang="ko">다중접근IP, 스팸IP를 자동적으로 차단해주는 학습형 IP차단 모듈 입니다.</description>
+    <description xml:lang="en">Multiple access ip and spam ip banned by learning.</description>
+    <description xml:lang="zh-CN">Multiple access ip and spam ip banned by learning.</description>
+    <description xml:lang="jp">複数の接近IP、スパムIPを自動的に遮断させてくれる学習型IP遮断モジュールです。</description>
+    <description xml:lang="es">Multiple access ip and spam ip banned by learning.</description>
+    <description xml:lang="ru">Multiple access ip and spam ip banned by learning.</description>
+    <description xml:lang="fr">Multiple access ip and spam ip banned by learning.</description>
+    <description xml:lang="zh-TW">Multiple access ip and spam ip banned by learning.</description>
+    <description xml:lang="vi">Multiple access ip and spam ip banned by learning.</description>
+    <description xml:lang="mn">Multiple access ip and spam ip banned by learning.</description>
+    <version>1.0.3.1</version>
+    <date>2011-10-23</date>
+    <category>accessory</category>
+
+    <author email_address="cbrghost@gmail.com" link="http://antiaccess.xpressengine.net">
+        <name xml:lang="ko">라르게덴</name>
+        <name xml:lang="en">largeden</name>
+        <name xml:lang="zh-CN">largeden</name>
+        <name xml:lang="jp">ラルゲデン</name>
+        <name xml:lang="es">largeden</name>
+        <name xml:lang="ru">largeden</name>
+        <name xml:lang="fr">largeden</name>
+        <name xml:lang="zh-TW">largeden</name>
+        <name xml:lang="vi">largeden</name>
+        <name xml:lang="mn">largeden</name>
+    </author>
+</module>

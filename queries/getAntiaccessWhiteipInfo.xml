@@ -1,0 +1,15 @@
+<query id="getAntiaccessWhiteipInfo" action="select">
+    <tables>
+        <table name="antiaccess_white_ip" />
+    </tables>
+    <columns>
+        <column name="*" />
+    </columns>
+    <conditions>
+        <condition operation="equal" column="white_srl" var="white_srl" filter="number" pipe="where" />
+        <condition operation="equal" column="source_host" var="source_host" pipe="and" />
+        <condition operation="equal" column="follow_host" var="follow_host" pipe="and" />
+        <condition operation="equal" column="ipaddress" var="ipaddress" pipe="and" />
+    </conditions>
+    <navigation />
+</query>

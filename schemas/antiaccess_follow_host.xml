@@ -1,0 +1,12 @@
+<table name="antiaccess_follow_host">
+    <column name="follow_srl" type="number" size="11" notnull="notnull" primary_key="primary_key" />
+    <column name="host" type="varchar" size="250" notnull="notnull" />
+    <column name="rank" type="char" size="1" notnull="notnull" default="S" />
+    <column name="follow_key" type="varchar" size="60" notnull="notnull" />
+    <column name="state" type="char" size="3" notnull="notnull" />
+    <column name="my_level" type="char" size="3" notnull="notnull" />
+    <column name="follow_level" type="char" size="3" notnull="notnull" />
+    <column name="extra_vars" type="text" />
+    <column name="regdate" type="date" index="idx_regdate" />
+    <column name="last_update" type="date" index="idx_last_update" />
+</table>

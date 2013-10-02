@@ -1,0 +1,15 @@
+<query id="getAntiaccessBanhostCount" action="select">
+    <tables>
+        <table name="antiaccess_ban_host" />
+    </tables>
+    <columns>
+        <column name="count(*)" alias="count" />
+    </columns>
+    <conditions>
+        <condition operation="equal" column="host_srl" var="host_srl" filter="number" pipe="where" />
+        <condition operation="equal" column="host" var="host" pipe="and" />
+        <condition operation="equal" column="ban_type" var="ban_type" pipe="and" />
+        <condition operation="equal" column="white_type" var="white_type" pipe="and" />
+    </conditions>
+    <navigation />
+</query>

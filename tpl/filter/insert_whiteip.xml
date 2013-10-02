@@ -1,0 +1,10 @@
+<filter name="insert_whiteip" module="antiaccess" act="procAntiaccessAdminInsertWhiteip" confirm_msg_code="confirm_submit">
+    <form>
+        <node target="ipaddress" required="true" />
+    </form>
+    <parameter />
+    <response callback_func="complete">
+        <tag name="error" />
+        <tag name="message" />
+    </response>
+</filter>

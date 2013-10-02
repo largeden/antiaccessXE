@@ -1,0 +1,17 @@
+<query id="insertAntiaccessFollowhost" action="insert">
+    <tables>
+        <table name="antiaccess_follow_host" />
+    </tables>
+    <columns>
+        <column name="follow_srl" var="follow_srl" filter="number" notnull="notnull" />
+        <column name="host" var="host" notnull="notnull" />
+        <column name="follow_key" var="follow_key" />
+        <column name="state" var="state" filter="number" notnull="notnull" />
+        <column name="my_level" var="my_level" filter="number" />
+        <column name="follow_level" var="follow_level" filter="number" />
+        <column name="regdate" var="regdate" default="curdate()" />
+        <column name="last_update" var="last_update" default="curdate()" />
+        <column name="rank" var="rank" default="S" />
+        <column name="extra_vars" var="extra_vars" />
+    </columns>
+</query>

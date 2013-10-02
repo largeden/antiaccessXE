@@ -1,0 +1,29 @@
+@charset "utf-8";
+
+/* Basic */
+.green { color:#2fac49; }
+.red { color:#de4332; }
+#tCenter { text-align:center; border:1px solid black; }
+.w100 { width:100px; }
+
+table.rowTable thead tr th,
+table.rowTable tbody tr td { vertical-align:middle; }
+
+#country_selectable { list-style-type: none; margin: 10px; padding: 0; width:300px; height:300px; overflow-y:scroll; }
+#country_selectable li { margin: 1px; padding: 0.4em; font-size: 1em; }
+#country_selectable li.ui-selecting { background: #FECA40;}
+#country_selectable li.ui-selected { background: #F39814; color: white; }
+#country_selectable2 { list-style-type: none; margin: 10px; padding: 0; width:300px; height:300px; overflow-y:scroll; }
+#country_selectable2 li { margin: 1px; padding: 0.4em; font-size: 1em; }
+#country_selectable2 li.ui-selecting { background: #FECA40;}
+#country_selectable2 li.ui-selected { background: #F39814; color: white; }
+
+
+/* Severity Level */
+.targetItem { float:left; overflow:hidden; *zoom:1; margin-left:30px; }
+.displayItem { float:left; overflow:hidden; *zoom:1; }
+
+.displayButton { float:left; width:40px; text-align:center; margin-top:60px; }
+.displayButton a { margin-bottom:10px; }
+
+

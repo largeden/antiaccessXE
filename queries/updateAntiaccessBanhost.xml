@@ -1,0 +1,13 @@
+<query id="updateAntiaccessBanhost" action="update">
+    <tables>
+        <table name="antiaccess_ban_host" />
+    </tables>
+    <columns>
+        <column name="ban_type" var="ban_type" />
+        <column name="white_type" var="white_type" />
+    </columns>
+    <conditions>
+        <condition operation="equal" column="host_srl" var="host_srl" filter="number" pipe="where" />
+        <condition operation="equal" column="host" var="host" pipe="and" />
+    </conditions>
+</query>

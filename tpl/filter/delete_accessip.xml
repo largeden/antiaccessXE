@@ -1,0 +1,8 @@
+<filter name="delete_accessip" module="antiaccess" act="procAntiaccessAdminDeleteAccessip" confirm_msg_code="confirm_delete">
+    <form />
+    <parameter />
+    <response callback_func="complete">
+        <tag name="error" />
+        <tag name="message" />
+    </response>
+</filter>

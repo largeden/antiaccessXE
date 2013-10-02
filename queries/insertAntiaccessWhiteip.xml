@@ -1,0 +1,15 @@
+<query id="insertAntiaccessWhiteip" action="insert">
+    <tables>
+        <table name="antiaccess_white_ip" />
+    </tables>
+    <columns>
+        <column name="white_srl" var="white_srl" filter="number" notnull="notnull" />
+        <column name="source_host" var="source_host" notnull="notnull" />
+        <column name="follow_host" var="follow_host" />
+        <column name="ipaddress" var="ipaddress" notnull="notnull" />
+        <column name="country_code" var="country_code" notnull="notnull" />
+        <column name="apply" var="apply" default="N" />
+        <column name="public" var="public" default="N" />
+        <column name="regdate" var="regdate" default="curdate()" />
+    </columns>
+</query>

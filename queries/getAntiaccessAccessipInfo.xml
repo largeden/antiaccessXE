@@ -1,0 +1,14 @@
+<query id="getAntiaccessAccessipInfo" action="select">
+    <tables>
+        <table name="antiaccess_access_ip" />
+    </tables>
+    <columns>
+        <column name="*" />
+    </columns>
+    <conditions>
+        <condition operation="equal" column="access_srl" var="access_srl" filter="number" pipe="where" />
+        <condition operation="equal" column="ipaddress" var="ipaddress" pipe="and" />
+        <condition operation="equal" column="block" var="block" pipe="and" />
+    </conditions>
+    <navigation />
+</query>

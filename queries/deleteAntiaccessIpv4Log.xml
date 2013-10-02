@@ -1,0 +1,9 @@
+<query id="deleteAntiaccessIpv4Log" action="delete">
+    <tables>
+        <table name="antiaccess_ipv4_log" />
+    </tables>
+    <conditions>
+        <condition operation="equal" column="ipaddress" var="ipaddress" pipe="where" />
+        <condition operation="below" column="regdate" var="regdate" pipe="and" />
+    </conditions>
+</query>

@@ -1,0 +1,12 @@
+<filter name="insert_followhost" module="antiaccess" act="procAntiaccessAdminInsertFollowhost" confirm_msg_code="confirm_submit">
+    <form>
+        <node target="antiaccess_followhost" required="true" />
+    </form>
+    <parameter>
+        <param name="host" target="antiaccess_followhost" />
+    </parameter>
+    <response callback_func="completeInsertFollow">
+        <tag name="error" />
+        <tag name="message" />
+    </response>
+</filter>
