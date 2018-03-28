@@ -2,7 +2,7 @@
     /**
      * @class  antiaccessIndex
      * @author largeden (cbrghost@gmail.com)
-     * @brief  antiaccessXE Index class
+     * @brief  antiaccessXE Index class 
      **/
 
     class antiaccessIndex {
